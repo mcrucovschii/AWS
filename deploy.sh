@@ -2,7 +2,7 @@
 
 STACK_NAME="${STACK_NAME:-chipylove}"
 
-# Verify AWS access2
+# Verify AWS access
 aws iam get-user &> /dev/null || \
   echo "Cannot access AWS."
 
