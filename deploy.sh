@@ -24,9 +24,9 @@ aws cloudformation deploy \
   --template-file cloudformation.json \
   --stack-name "${STACK_NAME}"
 
-IP="$(aws cloudformation describe-stacks \
+STACK_IP="$(aws cloudformation describe-stacks \
   --stack-name "${STACK_NAME}" | \
   jq -r .Stacks[0].Outputs[2].OutputValue)"
 
 echo
-echo "Your instance can be accessed at http://${IP}"
+echo "Your instance can be accessed at http://${STACK_IP}"
