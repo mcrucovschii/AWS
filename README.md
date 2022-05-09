@@ -18,7 +18,7 @@ This will display a URL that you can then access in the browser.
 
 Some steps that were taken ahead of time:
 
-- Created a EC2 keypair called "chipy"
+- Created a EC2 keypair called "myKeyPair"
 - Modified the default security group to allow anyone to access port 80 (http)
 
 If you have some questions about this demo, feel free to open a GitHub issue here.

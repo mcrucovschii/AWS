@@ -11,17 +11,17 @@ template = Template()
 
 template.add_mapping('RegionMap', {
     # Virginia
-    "us-east-1": {"AMI": "ami-0323c3dd2da7fb37d"},
+    #"us-east-1": {"AMI": "ami-0022f774911c1d690"},
 
-    # California
-    "us-west-1": {"AMI": "ami-06fcc1f0bc2c8943f"},
+    # Oregon
+    "us-west-2": {"AMI": "ami-0ca285d4c2cda3300"},
 })
 
 ec2_instance = template.add_resource(ec2.Instance(
     "Ec2Instance",
     ImageId=FindInMap("RegionMap", Ref("AWS::Region"), "AMI"),
     InstanceType="t2.micro",
-    KeyName="chipy",
+    KeyName="myKeyPair",
     SecurityGroups=["default"],
     UserData=Base64("""#!/bin/bash -xe
 exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
