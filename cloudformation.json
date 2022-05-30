@@ -1,0 +1,89 @@
+{
+    "Mappings": {
+        "RegionMap": {
+            "us-east-1": {
+                "AMI": "ami-0022f774911c1d690"
+            },
+            "us-west-2": {
+                "AMI": "ami-0ca285d4c2cda3300"
+            }
+        }
+    },
+    "Outputs": {
+        "AZ": {
+            "Description": "Availability Zone of the newly created EC2 instance",
+            "Value": {
+                "Fn::GetAtt": [
+                    "Ec2Instance",
+                    "AvailabilityZone"
+                ]
+            }
+        },
+        "InstanceId": {
+            "Description": "InstanceId of the newly created EC2 instance",
+            "Value": {
+                "Ref": "Ec2Instance"
+            }
+        },
+        "PrivateDNS": {
+            "Description": "Private DNSName of the newly created EC2 instance",
+            "Value": {
+                "Fn::GetAtt": [
+                    "Ec2Instance",
+                    "PrivateDnsName"
+                ]
+            }
+        },
+        "PrivateIP": {
+            "Description": "Private IP address of the newly created EC2 instance",
+            "Value": {
+                "Fn::GetAtt": [
+                    "Ec2Instance",
+                    "PrivateIp"
+                ]
+            }
+        },
+        "PublicDNS": {
+            "Description": "Public DNSName of the newly created EC2 instance",
+            "Value": {
+                "Fn::GetAtt": [
+                    "Ec2Instance",
+                    "PublicDnsName"
+                ]
+            }
+        },
+        "PublicIP": {
+            "Description": "Public IP address of the newly created EC2 instance",
+            "Value": {
+                "Fn::GetAtt": [
+                    "Ec2Instance",
+                    "PublicIp"
+                ]
+            },
+                    }
+    },
+    "Resources": {
+        "Ec2Instance": {
+            "Properties": {
+                "ImageId": {
+                    "Fn::FindInMap": [
+                        "RegionMap",
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "AMI"
+                    ]
+                },
+                "InstanceType": "t2.micro",
+                "KeyName": "myKeyPair",
+                "SecurityGroups": [
+                    "default"
+                ],
+                "UserData": {
+                    "Fn::Base64": "#!/bin/bash -xe\nexec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1\n    mkdir -p /webserver\n    cd /webserver\n    echo \"<h1>hello world</h1>\" > index.html\n    python -m SimpleHTTPServer 80 &\n"
+                }
+            },
+            "Type": "AWS::EC2::Instance"
+        }
+    }
+}
