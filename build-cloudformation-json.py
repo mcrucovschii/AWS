@@ -11,7 +11,7 @@ template = Template()
 
 template.add_mapping('RegionMap', {
     # Virginia
-    #"us-east-1": {"AMI": "ami-0022f774911c1d690"},
+    "us-east-1": {"AMI": "ami-0022f774911c1d690"},
 
     # Oregon
     "us-west-2": {"AMI": "ami-0ca285d4c2cda3300"},
