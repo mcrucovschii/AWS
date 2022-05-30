@@ -130,5 +130,3 @@ venv.bak/
 # JetBrains
 .idea/
 
-# custom
-cloudformation.json
