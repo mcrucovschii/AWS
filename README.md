@@ -22,5 +22,3 @@ Some steps that were taken ahead of time:
 - Modified the default security group to allow anyone to access port 80 (http)
 
 If you have some questions about this demo, feel free to open a GitHub issue here.
-
-
